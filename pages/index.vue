@@ -1,22 +1,35 @@
 <script setup lang="ts">
+import { GenerateApiResponse } from "~~/types/interface";
+
 const isLoading = ref(false);
 const fetchedPrompt = ref("");
+const isEmpty = ref(false);
 const submit = async (prompt: string) => {
+  if (!prompt) {
+    isEmpty.value = true;
+  }
   if (prompt) {
     isLoading.value = true;
     try {
-      const response = await useLazyFetch("/api/generate", {
-        method: "post",
-        body: {
-          prompt,
-        },
-      });
-      fetchedPrompt.value = response?.data;
+      const response: GenerateApiResponse = await useLazyFetch(
+        "/api/generate",
+        {
+          method: "post",
+          body: {
+            prompt,
+          },
+        }
+      );
+      fetchedPrompt.value = response.data.value;
       isLoading.value = false;
+      isEmpty.value = false;
     } catch (error) {
-      isLoading.vfactcheckalue = false;
+      isLoading.value = false;
     }
   }
+};
+const checkEmptyValue = (value: boolean) => {
+  isEmpty.value = value;
 };
 </script>
 <template>
@@ -35,7 +48,11 @@ const submit = async (prompt: string) => {
             </p>
           </code>
         </div>
-        <TextArea class="mt-6" :is-loading="isLoading" @change:text="submit" />
+        <TextArea
+          class="mt-6"
+          :is-loading="isLoading"
+          :is-empty="isEmpty"
+          @change:text="submit" />
         <GeneratedResult ref="promptArea" :prompt="fetchedPrompt" />
       </div>
     </div>

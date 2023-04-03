@@ -33,7 +33,7 @@ onBeforeUnmount(() => {
             size="58"
             class="inline-block align-sub mr-2" />FactCheckAI
           <p
-            class="text-4xl bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text">
+            class="text-4xl bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text mt-3">
             Separating fact from
             <span class="line-through decoration-pink-500">fiction</span> with
             AI
