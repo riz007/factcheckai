@@ -25,6 +25,7 @@
     "typescript": "^5.0.3"
   },
   "dependencies": {
+    "@vercel/analytics": "^0.1.11",
     "daisyui": "^2.51.5",
     "typed.js": "^2.0.15"
   }
