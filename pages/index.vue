@@ -11,15 +11,12 @@ const submit = async (prompt: string) => {
   if (prompt) {
     isLoading.value = true;
     try {
-      const response: GenerateApiResponse = await useLazyFetch(
-        "/api/generate",
-        {
-          method: "post",
-          body: {
-            prompt,
-          },
-        }
-      );
+      const response = await useLazyFetch("/api/generate", {
+        method: "post",
+        body: {
+          prompt,
+        },
+      });
       fetchedPrompt.value = response.data.value;
       isLoading.value = false;
       isEmpty.value = false;
@@ -27,9 +24,6 @@ const submit = async (prompt: string) => {
       isLoading.value = false;
     }
   }
-};
-const checkEmptyValue = (value: boolean) => {
-  isEmpty.value = value;
 };
 </script>
 <template>
